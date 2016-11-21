@@ -1,6 +1,6 @@
 <?php
 
-// Accepts a product object and returns an html summary.
+// Accepts a product object and returns an html summary. Used a function to reduce I/O overhead of looped "includes"
 function product_card($product) {
 
     if($product == NULL) {

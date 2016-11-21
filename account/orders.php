@@ -1,7 +1,11 @@
-<?php include('../view/header.php'); ?>
+<?php
+// needed on all pages
+require_once('../config.php');
+include(APP_ROOT . 'view/header.php');
+?>
 
-<h1>Your Orders</h1>
+<h1>Template</h1>
 
-<p>Manage your orders here.</p>
+<p>Stuff here.</p>
 
-<?php include('../view/footer.php'); ?>
+<?php include(APP_ROOT . 'view/footer.php'); ?>

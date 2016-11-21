@@ -1,9 +1,11 @@
-<?php 
-include('../view/header.php'); 
+<?php
+// needed on all pages
+require_once('../config.php');
+include(APP_ROOT . 'view/header.php');
 
-require_once('../server/main.php');
-require_once('../server/database/products.php');
-require_once('../view/product_card.php');
+require_once(APP_ROOT . 'server/database/products.php');
+require_once(APP_ROOT . 'products/product_card.php');
+
 
 $product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
 
