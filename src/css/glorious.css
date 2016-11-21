@@ -1,0 +1,176 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1em;
+    margin: 0;
+    height: 100%;
+    background-color: white;
+    font-size: 1.3em;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.content {
+    padding: .5em .3em 2em .3em;
+}
+
+ a:link, a:hover, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+nav ul a:link, nav ul a:visited {
+    color: white;
+}
+
+nav {
+    background-color: #252835;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #252835;
+}
+
+nav ul li {
+    display: block;
+    position: relative;
+    text-align: center;
+    min-width: 25%;
+    text-align: center;
+}
+
+nav ul li a {
+    display: block;
+    padding: 1em .5em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: grey;
+}
+
+nav ul li ul {
+    display: none;
+    width: 100%;
+}
+
+nav ul li:hover > ul {
+    display: block;
+    position: absolute;
+}
+
+nav li:hover li a:hover {
+    background-color: grey;
+}
+
+nav ul ul ul {
+    left: 100%;
+    top: 0;
+}
+
+nav li.current-page a {
+    color: darkgoldenrod;
+}
+
+main {
+    margin: 0;
+}
+
+footer {
+    border-top: 2px solid grey;
+}
+
+.gold {
+    color: darkgoldenrod !important;
+}
+
+.purple {
+    color: rebeccapurple !important;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em 1.5em;
+}
+
+.site-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+
+.site-title img{
+    margin-right: .5em;
+    width: 3em;
+    height: auto;
+}
+
+.product-card {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+    border: 2px solid rebeccapurple;
+}
+
+.product-card > div {
+    width: 50%;
+    padding: 0 1.5em;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-width: 10em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.product-card .price {
+    color: darkgoldenrod;
+    font-size: 1.5em;
+    text-align: right;
+}
+
+@media (max-width:500px) {
+    body {
+        font-size: 1.0em;
+    }
+
+    .site-title {
+        display: none;
+    }
+
+    .product-card {
+        flex-direction: column;
+    }
+
+    .product-card > div {
+        width: unset;
+    }
+}
