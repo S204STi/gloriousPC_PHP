@@ -20,8 +20,7 @@ function product_card($product) {
         $product_price = '$' . number_format($product['PriceEach'], 2);
     }
 
-
-    $htmlString = <<<EOT
+    $htmlString = <<<HTML
     <a href="products/product_detail.php?product_id=$product_id">
         <div class="product-card">
             <div>
@@ -33,7 +32,7 @@ function product_card($product) {
             </div>
         </div>
     </a>
-EOT;
+HTML;
 
     return $htmlString;
 }

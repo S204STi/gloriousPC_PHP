@@ -3,9 +3,8 @@
 require_once('../config.php');
 include(APP_ROOT . 'view/header.php');
 
+// Page dependencies
 require_once(APP_ROOT . 'server/database/products.php');
-require_once(APP_ROOT . 'products/product_card.php');
-
 
 $product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
 
@@ -32,7 +31,7 @@ $product_price = '$' . number_format($product['PriceEach'], 2);
         <?php
 
         if($product["Stock"] > 0) {
-            echo <<<EOT
+            echo <<<HTML
             <form action="shopping/cart.php" method="post" 
                 id="add_to_cart_form">
                 <input type="hidden" name="action" value="add" />
@@ -42,7 +41,7 @@ $product_price = '$' . number_format($product['PriceEach'], 2);
                 <input type="text" name="quantity" value="1" size="2" />
                 <input type="submit" value="Add to Cart" />
             </form>
-EOT;
+HTML;
         }
         else
         {

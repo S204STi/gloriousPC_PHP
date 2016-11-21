@@ -3,8 +3,9 @@
 require_once('config.php');
 include(APP_ROOT . 'view/header.php');
 
+// Page dependencies
 require_once(APP_ROOT . 'server/database/products.php');
-require_once(APP_ROOT . 'products/product_card.php');
+require_once(APP_ROOT . 'view/product_card.php');
 
 ?>
 
