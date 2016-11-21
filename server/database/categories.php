@@ -2,17 +2,17 @@
 // Functions for using the product table
 
 // Get single product by id
-function get_product($product_id){
+function get_category($category_id){
     global $db;
     
     $query = '
         SELECT *
-        FROM Product
-        WHERE id = :product_id';
+        FROM ProductCategory
+        WHERE id = :category_id';
     
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':product_id', $product_id);
+        $statement->bindValue(':category_id', $category_id);
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
@@ -23,18 +23,16 @@ function get_product($product_id){
     }
 }
 
-// Get all products by a category id
-function get_products_by_category($category_id){
+// Get single product by id
+function get_all_categories(){
     global $db;
     
     $query = '
         SELECT *
-        FROM Product
-        WHERE ProductCategoryId = :category_id';
+        FROM ProductCategory;';
     
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':category_id', $category_id);
         $statement->execute();
         $result = $statement->fetchAll();
         $statement->closeCursor();
@@ -44,5 +42,4 @@ function get_products_by_category($category_id){
         display_db_error($error_message);
     }
 }
-
 ?>

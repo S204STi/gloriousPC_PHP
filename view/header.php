@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#ffffff">
 
   <link rel="stylesheet" href="src/css/font-awesome.min.css">
-  <link rel="stylesheet" href="src/css/glorious.css">
+  <link rel="stylesheet" href="src/css/site.css">
 
 </head>
 
@@ -35,7 +35,7 @@
             <span class="gold">GLORIOUS</span> PC
           </div>
         </a>
-        <div>
+        <div class="login">
           <a href="account/login.php" class="purple">Login</a> / <a href="account/signup.php" class="purple">Signup</a>
           <!--<a href="account/logout.php" class="purple">Logout</a>-->
         </div>
@@ -49,12 +49,23 @@
           <li>
             <a href="products/index.php">Products</a>
             <ul>
+
+              <?php
+                require_once('../server/main.php');
+                require_once('../server/database/categories.php');
+
+                $categories = get_all_categories();
+                foreach($categories as $category) :
+                  $category_name = $category['Name'];
+                  $category_id = $category['Id'];
+              ?>
+
               <li>
-                <a href="products/index.php?category_id=1">Graphics Cards</a>
+                <a href="products/index.php?category_id=<?php echo $category_id; ?>"><?php echo $category_name; ?></a>
               </li>
-              <li>
-                <a href="products/index.php?category_id=2">Keyboards</a>
-              </li>
+
+              <?php endforeach; ?>
+            
             </ul>
           </li>
           <li>

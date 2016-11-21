@@ -4,11 +4,10 @@ html {
 
 body {
     font-family: "Source Sans Pro", sans-serif;
-    font-size: 1em;
     margin: 0;
     height: 100%;
     background-color: white;
-    font-size: 1.3em;
+    font-size: 130%;
 }
 
 .container {
@@ -31,6 +30,33 @@ body {
 
 .text-right {
     text-align: right;
+}
+
+input[type="button"], input[type="submit"], button {
+    padding: .5em;
+    background-color: goldenrod;
+    border: 2px solid #252835;
+    box-shadow: 2px 3px 2px #252835;
+    color: black;
+    font-size: 85%;
+    position: relative;
+    top: -2px;
+}
+
+input[type="button"]:active, input[type="submit"]:active, button:active {
+    background-color: darkgoldenrod;
+    box-shadow: 1px 1px 2px #252835;
+    top: 2px;
+}
+
+label {
+    padding: .5em;
+}
+
+input[type="text"] {
+    padding: .6em;
+    border: 2px solid grey;
+    font-size: 85%
 }
 
 nav ul a:link, nav ul a:visited {
@@ -116,7 +142,7 @@ footer {
 }
 
 .site-title {
-    font-size: 1.4em;
+    font-size: 140%;
     font-weight: bold;
     display: flex;
     justify-content: flex-start;
@@ -133,44 +159,113 @@ footer {
 .product-card {
     display: flex;
     justify-content: space-between;
-    margin-top: 2em;
-    border: 2px solid rebeccapurple;
+    margin: 2em 1em 0em 1em;
+    border: 2px solid grey;
+    padding: 1em 0;
 }
 
 .product-card > div {
-    width: 50%;
     padding: 0 1.5em;
 }
 
+.product-card > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
 .product-card img {
-    width: 100%;
-    height: auto;
-    max-width: 10em;
+    width: auto;
+    height: 10em;
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
 }
 
 .product-card .price {
     color: darkgoldenrod;
-    font-size: 1.5em;
+    font-size: 150%;
     text-align: right;
 }
 
-@media (max-width:500px) {
+.product-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-detail > div {
+    width: 50%;
+    padding: 2em;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border: 2px solid grey;
+}
+
+.description {
+    line-height: 1.5em;
+    text-indent: 3em;
+}
+
+
+@media (max-width:900px) {
     body {
-        font-size: 1.0em;
+        font-size: 100%;
     }
 
-    .site-title {
+    input[type="button"], input[type="submit"], button {
+        font-size: 85%;
+    }
+
+    .product-card > div:nth-child(2) {
+        width: 50%;
+    }
+}
+
+
+@media (max-width:600px) {
+    body {
+        font-size: 90%;
+    }
+
+    .site-title > div:nth-child(2) {
         display: none;
     }
 
     .product-card {
         flex-direction: column;
+        align-items: center;
     }
 
     .product-card > div {
-        width: unset;
+        text-align: center;
+    }
+    
+
+    .product-card > div:nth-child(2) {
+        width: 100%;
+    }
+
+    .product-card .price {
+        text-align: unset;
+    }
+
+    .product-detail {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-detail > div {
+        width: 100%;
+    }
+
+    .product-image {
+        width: 75%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
