@@ -1,5 +1,5 @@
 <?php
-// Functions for using the product table
+// Database functions for the Product table
 
 // Get single product by id
 function get_product($product_id){
@@ -7,8 +7,9 @@ function get_product($product_id){
     
     $query = '
         SELECT *
-        FROM Product
-        WHERE id = :product_id';
+        FROM Product as p
+        INNER JOIN Category AS pc ON pc.CategoryId = p.CategoryId
+        WHERE p.ProductId = :product_id';
     
     try {
         $statement = $db->prepare($query);
@@ -29,8 +30,9 @@ function get_products_by_category($category_id){
     
     $query = '
         SELECT *
-        FROM Product
-        WHERE ProductCategoryId = :category_id';
+        FROM Product as p
+        INNER JOIN Category AS pc ON pc.CategoryId = p.CategoryId
+        WHERE p.CategoryId = :category_id';
     
     try {
         $statement = $db->prepare($query);

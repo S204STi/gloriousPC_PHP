@@ -1,12 +1,10 @@
 <?php  
 // needed on all pages
 require_once('config.php');
-include(APP_ROOT . 'view/header.php');
+include('server/view/header.php');
 
 // Page dependencies
-require_once(APP_ROOT . 'server/database/products.php');
-require_once(APP_ROOT . 'view/product_card.php');
-
+require_once('server/database/products.php');
 ?>
 
 <h1>Featured Products</h1>
@@ -22,9 +20,8 @@ foreach ($product_ids as $product_id) {
     $products[] = $product;
 }
 
-foreach ($products as $product) {
-    echo product_card($product);
-}
+require_once('products/product_card.php');
 
-include('view/footer.php'); 
+include('server/view/footer.php'); 
+
 ?>

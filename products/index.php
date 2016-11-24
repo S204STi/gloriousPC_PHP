@@ -1,15 +1,15 @@
 <?php
 // Needed on all pages
 require_once('../config.php');
-include(APP_ROOT . 'view/header.php');
+include('server/view/header.php');
 
 // Page dependencies
-require_once(APP_ROOT . 'server/database/products.php');
-require_once(APP_ROOT . 'view/product_card.php');
-require_once(APP_ROOT . 'server/database/categories.php');
+require_once('server/database/products.php');
+require_once('server/database/categories.php');
 
 $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
 
+// If no category was requested, show all items
 if ($category_id === NULL) {
         $product_ids = array(1, 2, 3);
 
@@ -21,28 +21,24 @@ if ($category_id === NULL) {
         }
         ?>
 
-        <h1>Products</h1>
+        <h1>All Products</h1>
         <p>Select a category to narrow your search.</p>
 
         <?php
+
+// Only show items from the requested category
 } else {
     $products = get_products_by_category($category_id);
 
     $category = get_category($category_id);
 
-    $category_name = $category["Name"];
+    $category_name = $category["CategoryName"];
 
-    echo "<h1>All $category_name</h1>";
+    echo "<h1>$category_name</h1>";
 }
 
-if(count($products) > 0) {
-    foreach ($products as $product) {
-        echo product_card($product);
-    }
-} else {
-    echo "<p>There doesn't seem to be anything here.</p>";
-}
+// product_card will show a card for each product in $products
+require_once('products/product_card.php');
 
+include('server/view/footer.php'); 
 ?>
-
-<?php include('../view/footer.php'); ?>

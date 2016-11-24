@@ -1,14 +1,14 @@
 <?php
-// Functions for using the product table
+// Database functions for the Category table
 
-// Get single product by id
+// Get single category by id
 function get_category($category_id){
     global $db;
     
     $query = '
         SELECT *
-        FROM ProductCategory
-        WHERE id = :category_id';
+        FROM Category
+        WHERE CategoryId = :category_id';
     
     try {
         $statement = $db->prepare($query);
@@ -23,13 +23,13 @@ function get_category($category_id){
     }
 }
 
-// Get single product by id
+// Get single category by id
 function get_all_categories(){
     global $db;
     
     $query = '
         SELECT *
-        FROM ProductCategory;';
+        FROM Category;';
     
     try {
         $statement = $db->prepare($query);

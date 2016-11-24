@@ -4,9 +4,8 @@
 	</main>
 
 	<footer>
-		<p class="text-center">&copy; <?php echo date("Y"); ?> GLORIOUS PC</p>
+		<div class="text-center">&copy; <?php echo date("Y"); ?> GLORIOUS PC</div>
 	</footer>
-
 
 </body>
 

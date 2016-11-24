@@ -5,9 +5,7 @@ html {
 body {
     font-family: "Source Sans Pro", sans-serif;
     margin: 0;
-    height: 100%;
     background-color: white;
-    font-size: 130%;
 }
 
 .container {
@@ -16,7 +14,7 @@ body {
 }
 
 .content {
-    padding: .5em .3em 2em .3em;
+    padding: .5em 1.5em;
 }
 
  a:link, a:hover, a:visited {
@@ -32,6 +30,10 @@ body {
     text-align: right;
 }
 
+.loud {
+    font-size: 130%;
+}
+
 input[type="button"], input[type="submit"], button {
     padding: .5em;
     background-color: goldenrod;
@@ -41,6 +43,7 @@ input[type="button"], input[type="submit"], button {
     font-size: 85%;
     position: relative;
     top: -2px;
+    cursor: pointer;
 }
 
 input[type="button"]:active, input[type="submit"]:active, button:active {
@@ -69,7 +72,7 @@ nav {
 
 nav ul {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -119,11 +122,12 @@ nav li.current-page a {
 }
 
 main {
-    margin: 0;
+    margin: 0 0 2em 0;
 }
 
 footer {
     border-top: 2px solid grey;
+    padding: 1.4em;
 }
 
 .gold {
@@ -138,7 +142,6 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .5em 1.5em;
 }
 
 .site-title {
@@ -159,7 +162,7 @@ footer {
 .product-card {
     display: flex;
     justify-content: space-between;
-    margin: 2em 1em 0em 1em;
+    margin-top: 2em;
     border: 2px solid grey;
     padding: 1em 0;
 }
@@ -191,12 +194,12 @@ footer {
 
 .product-detail {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-top: 3em;
 }
 
-.product-detail > div {
-    width: 50%;
-    padding: 2em;
+.product-detail > div:nth-child(2) {
+    padding-left: 3em;
 }
 
 .product-image {
@@ -208,13 +211,35 @@ footer {
 .description {
     line-height: 1.5em;
     text-indent: 3em;
+    margin: .5;
+}
+
+.cart-controls {
+    margin: 0;
+    text-align: right;
+}
+
+.cart-controls > div {
+    margin: 2em 2em;
+}
+
+#cart, #cart > table {
+    width: 100%;
+}
+
+#cart-footer {
+    padding: 2em 0;
+}
+
+/* PCMR mode for UHD 4k screens */
+@media (min-width:1921px) {
+    body {
+        font-size: 130%;
+    }
 }
 
 
 @media (max-width:900px) {
-    body {
-        font-size: 100%;
-    }
 
     input[type="button"], input[type="submit"], button {
         font-size: 85%;
@@ -261,11 +286,16 @@ footer {
     .product-detail > div {
         width: 100%;
     }
+    
+    .product-detail > div:nth-child(2) {
+        margin: 2em;
+    }
 
     .product-image {
-        width: 75%;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+    }
+
+    .product-detail > div:nth-child(2) {
+        padding-left: 0;
     }
 }

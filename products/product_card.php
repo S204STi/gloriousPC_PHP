@@ -1,5 +1,14 @@
 <?php
 
+// Show cards for each product or a message if none available
+if(count($products) > 0) {
+    foreach ($products as $product) {
+        echo product_card($product);
+    }
+} else {
+    echo "<p>There doesn't seem to be anything here.</p>";
+}
+
 // Accepts a product object and returns an html summary. Used a function to reduce I/O overhead of looped "includes"
 function product_card($product) {
 
@@ -7,9 +16,9 @@ function product_card($product) {
         return;
     }
 
-    $product_name = htmlspecialchars($product['Name']);
+    $product_name = htmlspecialchars($product['ProductName']);
     $image_path = htmlspecialchars($product['ImagePath']);
-    $product_id = $product["Id"];
+    $product_id = $product["ProductId"];
 
 
     if($product["Stock"] < 1) {

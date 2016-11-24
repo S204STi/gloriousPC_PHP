@@ -1,11 +1,17 @@
 <?php
 // needed on all pages
 require_once('../config.php');
-include(APP_ROOT . 'view/header.php');
+include('server/view/header.php');
 ?>
 
-<h1>Template</h1>
+<h1>Sign up!</h1>
 
-<p>Stuff here.</p>
+<form action="signup.php" method="post">
+    
+</form>
 
-<?php include(APP_ROOT . 'view/footer.php'); ?>
+<?php 
+include('server/customers/customer_edit.php');
+
+include('server/view/footer.php'); 
+?>
