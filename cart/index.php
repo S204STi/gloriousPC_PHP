@@ -49,6 +49,13 @@ switch ($action) {
         $cart = cart_get_items();
         break;
 
+    case 'clear':
+
+        // Clear the cart
+        clear_cart();
+        $cart = cart_get_items();
+        break;
+
     default:
         
         // Get the cart to display it
@@ -66,19 +73,22 @@ include('server/view/header.php');
 <?php if (cart_product_count() == 0) : ?>
         <p>Your cart is empty.</p>
   <?php else: ?>
-        <form action="cart/index.php" method="post" id="cart">
+        <form action="cart/index.php" method="post" id="cart-table">
             <input type="hidden" name="action" value="update">
-            <table class="cart-table">
+            <table class="cart-table" cellspacing="0">
             <tr>
-                <th>Item</th>
+                <th class="text-left"></th>
                 <th class="text-right">Price</th>
                 <th class="text-right">Quantity</th>
                 <th class="text-right">Total</th>
             </tr>
             <?php foreach ($cart as $product_id => $item) : ?>
             <tr>
-                <td><a href="products/index.php?product_id=<?php echo $product_id ?>">
-                    <?php echo htmlspecialchars($item['ProductName']); ?>
+                <td>
+                    <a href="products/index.php?product_id=<?php echo $product_id ?>">
+                        <div>
+                            <strong><?php echo htmlspecialchars($item['ProductName']); ?><strong>
+                        </div>
                     </a>
                 </td>
                 <td class="text-right">
@@ -94,7 +104,7 @@ include('server/view/header.php');
                 </td>
             </tr>
             <?php endforeach; ?>
-            <tr id="cart-footer" >
+            <tr id="cart-table-footer" >
                 <td colspan="3" class="text-right" ><b>Subtotal</b></td>
                 <td class="text-right">
                     <?php echo sprintf('$%.2f', cart_subtotal()); ?>
@@ -110,24 +120,41 @@ include('server/view/header.php');
         
     <?php endif; ?>
 
-    <p>Return to: <a href="../">Home</a></p>
+    <div id="checkout-controls">
 
     <!-- display most recent category -->
     <?php if (isset($_SESSION['last_added']['CategoryId'])) :
             $category_url = 'products' .
                 '?category_id=' . $_SESSION['last_added']['CategoryId'];
         ?>
-        <p>Return to: <a href="<?php echo $category_url; ?>">
-            <?php echo $_SESSION['last_added']['CategoryName']; ?></a></p>
+        <div><a href="<?php echo $category_url; ?>">
+            <button>
+                <span class="fa fa-arrow-left"></span>&nbsp; <?php echo $_SESSION['last_added']['CategoryName']; ?>
+            </button>
+        </a></div>
     <?php endif; ?>
 
     <!-- if cart has items, display the Checkout link -->
     <?php if (cart_product_count() > 0) : ?>
-        <p>
-            Proceed to: <a href="checkout/index.php">Checkout</a>
-        </p>
+
+        <div>
+            <a href="cart/index.php?action=clear">
+                <button>
+                    Empty Cart
+                </button>
+            </a>
+        </div>
+
+        <div>
+            <a href="checkout/index.php">
+                <button>
+                    Checkout &nbsp;<span class="fa fa-arrow-right"></span>
+                </button>
+            </a>
+        </div>
     <?php endif; ?>
 
+    </div>
 
 <?php include('server/view/footer.php'); ?>
 

@@ -17,11 +17,6 @@ body {
     padding: .5em 1.5em;
 }
 
- a:link, a:hover, a:visited {
-    color: black;
-    text-decoration: none;
-}
-
 .text-center {
     text-align: center;
 }
@@ -30,8 +25,25 @@ body {
     text-align: right;
 }
 
+.text-left {
+    text-align: left;
+}
+
 .loud {
     font-size: 130%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+p a:link, p a {
+    color: rebeccapurple;
+}
+
+p a:hover, a:active {
+    color: darkgoldenrod;
 }
 
 input[type="button"], input[type="submit"], button {
@@ -125,6 +137,10 @@ main {
     margin: 0 0 2em 0;
 }
 
+main h1:nth-child(1) {
+    margin-bottom: 1.5em;
+}
+
 footer {
     border-top: 2px solid grey;
     padding: 1.4em;
@@ -132,10 +148,6 @@ footer {
 
 .gold {
     color: darkgoldenrod !important;
-}
-
-.purple {
-    color: rebeccapurple !important;
 }
 
 .topbar {
@@ -195,7 +207,6 @@ footer {
 .product-detail {
     display: flex;
     justify-content: space-around;
-    margin-top: 3em;
 }
 
 .product-detail > div:nth-child(2) {
@@ -223,13 +234,32 @@ footer {
     margin: 2em 2em;
 }
 
-#cart, #cart > table {
+#cart-table, #cart-table > table {
     width: 100%;
 }
 
-#cart-footer {
+#cart-table th {
+    border-bottom: 2px solid grey;
+    margin: 0 0;
+    font-weight: normal;
+}
+
+#cart-table-footer td {
+    border-top: 2px solid grey;
     padding: 2em 0;
 }
+
+table td div {
+    padding: 2em 0;
+}
+
+#checkout-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3em;
+}
+
+
 
 /* PCMR mode for UHD 4k screens */
 @media (min-width:1921px) {

@@ -6,6 +6,11 @@ include('server/view/header.php');
 
 <h1>Checkout</h1>
 
+<?php if(! isset($_SESSION['user'])){
+    echo '<p>Please <a href="account/login.php">sign in</a> to continue.</p>';
+}
+?>
+
 <p>Enter payment information.</p>
 
 <?php include('server/view/footer.php'); ?>

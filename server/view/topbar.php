@@ -12,12 +12,12 @@
     <?php 
       if (isset($_SESSION['user'])) {
         echo <<<HTML
-      <a href="account/login.php?action=logout" class="purple">Logout</a>
+      <p><a href="account/login.php?action=logout">Logout</a></p>
 HTML;
       } else {
 
         echo <<<HTML
-      <a href="account/login.php" class="purple">Login</a>
+      <p><a href="account/login.php">Login</a></p>
 HTML;
       }
       ?>

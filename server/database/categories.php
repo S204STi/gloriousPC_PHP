@@ -8,7 +8,7 @@ function get_category($category_id){
     $query = '
         SELECT *
         FROM Category
-        WHERE CategoryId = :category_id';
+        WHERE CategoryId = :category_id;';
     
     try {
         $statement = $db->prepare($query);
@@ -29,7 +29,8 @@ function get_all_categories(){
     
     $query = '
         SELECT *
-        FROM Category;';
+        FROM Category
+        ORDER BY CategoryId;';
     
     try {
         $statement = $db->prepare($query);

@@ -9,7 +9,7 @@ function get_product($product_id){
         SELECT *
         FROM Product as p
         INNER JOIN Category AS pc ON pc.CategoryId = p.CategoryId
-        WHERE p.ProductId = :product_id';
+        WHERE p.ProductId = :product_id;';
     
     try {
         $statement = $db->prepare($query);
@@ -32,7 +32,8 @@ function get_products_by_category($category_id){
         SELECT *
         FROM Product as p
         INNER JOIN Category AS pc ON pc.CategoryId = p.CategoryId
-        WHERE p.CategoryId = :category_id';
+        WHERE p.CategoryId = :category_id
+        ORDER BY p.ProductId;';
     
     try {
         $statement = $db->prepare($query);
