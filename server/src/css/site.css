@@ -10,7 +10,7 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 75em;
 }
 
 .content {
@@ -55,6 +55,7 @@ input[type="button"], input[type="submit"], button {
     font-size: 85%;
     position: relative;
     top: -2px;
+    min-width: 5em;
     cursor: pointer;
 }
 
@@ -253,13 +254,36 @@ table td div {
     padding: 2em 0;
 }
 
-#checkout-controls {
+#bottom-controls {
     display: flex;
     justify-content: space-between;
     margin-top: 3em;
 }
 
+.form-group label {
+    float: left;
+    width: 7em;
+    margin-right: .5em;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.form-group input {
+    box-sizing: border-box;
+    width: 20em;
+    margin-bottom: 2em;
+}
+
+.form button {
+    margin-left: 10em;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
 
 /* PCMR mode for UHD 4k screens */
 @media (min-width:1921px) {
@@ -327,5 +351,15 @@ table td div {
 
     .product-detail > div:nth-child(2) {
         padding-left: 0;
+    }
+}
+
+@media (max-width:410px) {
+    .form-group label {
+        text-align: left;
+    }
+
+    .form button {
+        margin: 0;
     }
 }

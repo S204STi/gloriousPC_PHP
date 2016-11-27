@@ -9,18 +9,17 @@
   </a>
   <div class="login">
 
-    <?php 
-      if (isset($_SESSION['user'])) {
-        echo <<<HTML
-      <p><a href="account/login.php?action=logout">Logout</a></p>
-HTML;
-      } else {
+    <p><a href="account/index.php">
 
-        echo <<<HTML
-      <p><a href="account/login.php">Login</a></p>
-HTML;
+    <?php 
+
+      if (isset($_SESSION['user'])) {
+        echo "Logout";
+      } else {
+        echo "Login";
       }
-      ?>
-      
+    ?>
+
+      </a></p>
   </div>
 </div>

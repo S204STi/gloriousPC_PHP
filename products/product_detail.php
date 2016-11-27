@@ -42,7 +42,7 @@ $product_price = '$' . number_format($product['PriceEach'], 2);
                                 value="$product_id" />
                         <label for="quantity">Qty:</label>
                         <input type="text" name="quantity" value="1" size="2" />
-                        <input type="submit" value="Add to Cart" />
+                        <button type="submit" >Add to Cart</button>
                     </form>
 HTML;
                 }

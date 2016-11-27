@@ -5,8 +5,8 @@
 
       <?php
 
-        require_once(APP_ROOT . 'server/database/categories.php');
-        require_once(APP_ROOT . 'server/database/cart.php');
+        require_once('server/database/categories.php');
+        require_once('server/database/cart.php');
 
         // Dynamically create the product menu with an item for each category that exists in the db
         $categories = get_all_categories();
@@ -28,13 +28,13 @@ HTML;
 
     if (isset($_SESSION['admin'])) {
 
-      include(APP_ROOT . "server/view/navbar-admin.php");
+      include("server/view/navbar-admin.php");
 
     } else {
 
       if (isset($_SESSION['user'])) {
 
-        include(APP_ROOT . "server/view/navbar-admin.php");
+        include("server/view/navbar-admin.php");
 
       }
     }

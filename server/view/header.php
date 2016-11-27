@@ -27,13 +27,13 @@
     <header>
       <!--Page Container keeps the site from getting too wide-->
       <div class="container content">
-        <?php include(APP_ROOT . 'server/view/topbar.php'); ?>
+        <?php include('server/view/topbar.php'); ?>
       </div>
 
       <!--Navigation Bar-->
       <nav>
         <div class="container">
-          <?php include(APP_ROOT . 'server/view/navbar.php'); ?>
+          <?php include('server/view/navbar.php'); ?>
         </div>
       </nav>
     </header>

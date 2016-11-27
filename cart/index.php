@@ -112,7 +112,7 @@ include('server/view/header.php');
             </tr>
             <tr>
                 <td colspan="4" class="text-right">
-                    <input type="submit" value="Update Cart">
+                    <button type="submit" >Update Cart</button>
                 </td>
             </tr>
             </table>
@@ -120,7 +120,7 @@ include('server/view/header.php');
         
     <?php endif; ?>
 
-    <div id="checkout-controls">
+    <div id="bottom-controls">
 
     <!-- display most recent category -->
     <?php if (isset($_SESSION['last_added']['CategoryId'])) :
