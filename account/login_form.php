@@ -1,18 +1,21 @@
+<!--this page is delivered by index.php-->
 <h1>Login</h1>
 
 <div class="form-wrapper">
-    <form action="account/index.php" class="form" method="post">
+    <form action="account/index.php" method="post">
 
-        <input type="hidden" name="action" value="login_form">
+        <input type="hidden" name="action" value="login">
+
+        <?php include('server/view/error_messages.php'); ?>
 
         <div class="form-group">
         <label for="UserName">User Name:</label>
-            <input type="text" name="UserName" required>
+            <input type="text" name="UserName" value="<?php echo htmlspecialchars($UserName) ?>">
         </div>
 
         <div class="form-group">
         <label for="Password">Password:</label>
-            <input type="text" name="Password" required>
+            <input type="text" name="Password">
         </div>
 
         <button type="submit">Login</button>
@@ -23,7 +26,7 @@
 
 <div id="bottom-controls">
     <form action="account/index.php" method="post">
-        <input type="hidden" name="action" value="register">
+        <input type="hidden" name="action" value="view_register">
         <button type="submit">Register</button>
     </form>
 </div>

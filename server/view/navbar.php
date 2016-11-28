@@ -30,13 +30,11 @@ HTML;
 
       include("server/view/navbar-admin.php");
 
-    } else {
+    } 
+    if (isset($_SESSION['user'])) {
 
-      if (isset($_SESSION['user'])) {
+        include("server/view/navbar-user.php");
 
-        include("server/view/navbar-admin.php");
-
-      }
     }
 ?>
 

@@ -12,8 +12,7 @@
     <p><a href="account/index.php">
 
     <?php 
-
-      if (isset($_SESSION['user'])) {
+      if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
         echo "Logout";
       } else {
         echo "Login";

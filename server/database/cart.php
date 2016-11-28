@@ -11,6 +11,10 @@ if (!isset($_SESSION['cart']) ) {
 // Add an item to the cart
 function cart_add_item($product_id, $quantity) {
 
+    if(! isset($_SESSION['cart'][$product_id])) {
+        $_SESSION['cart'][$product_id] = 0;
+    }
+
     // Add the quantity of the item to the cart
     $_SESSION['cart'][$product_id] += round($quantity, 0);
 

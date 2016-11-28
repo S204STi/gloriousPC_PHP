@@ -151,6 +151,10 @@ footer {
     color: darkgoldenrod !important;
 }
 
+.error {
+    color: crimson;
+}
+
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -276,7 +280,12 @@ table td div {
     margin-bottom: 2em;
 }
 
-.form button {
+ul.error {
+    max-width: 30em;
+    margin-bottom: 2em;
+}
+
+.form-wrapper form button {
     margin-left: 10em;
 }
 
@@ -359,7 +368,7 @@ table td div {
         text-align: left;
     }
 
-    .form button {
+    .form-wrapper form button {
         margin: 0;
     }
 }

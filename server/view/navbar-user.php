@@ -1,8 +1,8 @@
 <li>
-  <a href="account/profile.php">Account</a>
+  <a href="account/index.php?action=view_profile">Account</a>
   <ul>
     <li>
-      <a href="account/profile.php">Profile</a>
+      <a href="account/index.php?action=view_profile">Profile</a>
     </li>
     <li>
       <a href="account/orders.php">Orders</a>

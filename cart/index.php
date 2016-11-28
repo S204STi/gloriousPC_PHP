@@ -4,7 +4,6 @@ require_once('../config.php');
 
 // Page dependencies
 require_once('server/database/cart.php');
-require_once('server/util/input_validation.php');
 
 // Check for get or post actions being called
 $action = filter_input(INPUT_POST, 'action');
@@ -27,7 +26,7 @@ switch ($action) {
         // validate the quantity entry
         if ($quantity === null) {
             display_error('You must enter a quantity.');
-        } elseif (!is_valid_number($quantity, 1)) {
+        } elseif (!is_numeric(round($quantity, 0))) {
             display_error('Quantity must be 1 or more.');
         }
 
@@ -105,10 +104,10 @@ include('server/view/header.php');
             </tr>
             <?php endforeach; ?>
             <tr id="cart-table-footer" >
-                <td colspan="3" class="text-right" ><b>Subtotal</b></td>
-                <td class="text-right">
+                <td colspan="3" class="text-right loud" ><b>Subtotal</b></td>
+                <td class="text-right gold loud"><strong>
                     <?php echo sprintf('$%.2f', cart_subtotal()); ?>
-                </td>
+                </strong></td>
             </tr>
             <tr>
                 <td colspan="4" class="text-right">
