@@ -1,14 +1,4 @@
 <div class="form-group">
-    <label for="Password">Password:</label>
-    <input type="text" name="Password">
-</div>
-
-<div class="form-group">
-    <label for="Password2">Retype Pwd:</label>
-    <input type="text" name="Password2">
-</div>
-
-<div class="form-group">
     <label for="FirstName">First Name:</label>
     <input type="text" name="FirstName" value="<?php echo htmlspecialchars($FirstName) ?>">
 </div>

@@ -69,10 +69,10 @@ label {
     padding: .5em;
 }
 
-input[type="text"] {
+input[type="password"], input[type="text"] {
     padding: .6em;
     border: 2px solid grey;
-    font-size: 85%
+    font-size: 85%;
 }
 
 nav ul a:link, nav ul a:visited {
@@ -239,6 +239,11 @@ footer {
     margin: 2em 2em;
 }
 
+.cart-controls input {
+    text-align: right;
+    width: 2em;
+}
+
 #cart-table, #cart-table > table {
     width: 100%;
 }
@@ -252,6 +257,10 @@ footer {
 #cart-table-footer td {
     border-top: 2px solid grey;
     padding: 2em 0;
+}
+
+#cart-table .qty-col input {
+    width: 3em;
 }
 
 table td div {

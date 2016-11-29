@@ -6,14 +6,13 @@
 
         <input type="hidden" name="action" value="register">
         
-        <?php include('server/view/error_messages.php'); ?>
-
-        <div class="form-group">
-            <label for="UserName">User Name:</label>
-            <input type="text" name="UserName" value="<?php echo htmlspecialchars($UserName) ?>">
-        </div>
-
-        <?php include('account/customer_edit_form.php'); ?>
+        <?php 
+        
+        include('server/view/error_messages.php'); 
+        include('account/user_edit_fields.php'); 
+        include('account/profile_edit_fields.php');
+        
+        ?>
 
         <button type="submit">Register</button>
 
@@ -22,6 +21,6 @@
 
 <div id="bottom-controls">
     <form action="account/index.php" method="post">
-        <button type="submit">Login</button>
+        <button type="submit"><span class="fa fa-arrow-left"></span>&nbsp; Login</button>
     </form>
 </div>

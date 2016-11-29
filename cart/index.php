@@ -93,8 +93,8 @@ include('server/view/header.php');
                 <td class="text-right">
                     <?php echo sprintf('$%.2f', $item['PriceEach']); ?>
                 </td>
-                <td class="text-right">
-                    <input type="text" size="3" class="right"
+                <td class="text-right qty-col">
+                    <input type="text" class="text-right"
                            name="items[<?php echo $product_id; ?>]"
                            value="<?php echo $item['Quantity']; ?>">
                 </td>

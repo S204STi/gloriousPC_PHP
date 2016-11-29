@@ -6,17 +6,12 @@
 
         <input type="hidden" name="action" value="login">
 
-        <?php include('server/view/error_messages.php'); ?>
-
-        <div class="form-group">
-        <label for="UserName">User Name:</label>
-            <input type="text" name="UserName" value="<?php echo htmlspecialchars($UserName) ?>">
-        </div>
-
-        <div class="form-group">
-        <label for="Password">Password:</label>
-            <input type="text" name="Password">
-        </div>
+        <?php 
+        
+        include('server/view/error_messages.php'); 
+        include('account/login_fields.php'); 
+        
+        ?>
 
         <button type="submit">Login</button>
         
@@ -25,8 +20,15 @@
 </div>
 
 <div id="bottom-controls">
+
+    <div>
+    </div>
+
+    <div>
+    </div>
+
     <form action="account/index.php" method="post">
         <input type="hidden" name="action" value="view_register">
-        <button type="submit">Register</button>
+        <button type="submit">Register &nbsp;<span class="fa fa-arrow-right"></span></button>
     </form>
 </div>

@@ -8,23 +8,6 @@ function get_web_root() {
     return $app_path;
 }
 
-function logout() {
-    // Clear the session array on the server
-    $_SESSION = array();
-
-    // Delete the session cookie.
-    if (ini_get("session.use_cookies")) {
-        $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000,
-            $params["path"], $params["domain"],
-            $params["secure"], $params["httponly"]
-        );
-    }
-
-    // Destroy the session.
-    session_destroy();
-}
-
 // This gets the location of our config.php, which is assumed to be in our root directory.
 // We can then requre config to any page and use APP_ROOT as the basis of all other requires.
 define("APP_ROOT", realpath(dirname(__FILE__)) . '/');

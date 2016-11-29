@@ -23,7 +23,7 @@ function get_user_by_login($userName, $password) {
     }
 }
 
-function user_name_exists($userName) {
+function get_user_by_userName($userName) {
     global $db;
 
     $query = '
@@ -56,6 +56,31 @@ function create_user($userName, $password) {
         $statement = $db->prepare($query);
         $statement->bindValue(':userName', $userName);
         $statement->bindValue(':password', $password);
+        $statement->execute();
+        $userId = $db->lastInsertId();
+        $statement->closeCursor();
+        return $userId;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+function update_credentials($userName, $password, $appUserId) {
+    global $db;
+
+    $password = sha1($userName . $password);
+
+    $query = '
+        UPDATE AppUser  
+        SET UserName = :userName, Password = :password 
+        WHERE AppUserId = :appUserId';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':userName', $userName);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':appUserId', $appUserId);
         $statement->execute();
         $userId = $db->lastInsertId();
         $statement->closeCursor();
