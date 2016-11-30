@@ -75,7 +75,7 @@ switch ($action) {
         
         $error_messages = $form->getErrorMessages();
 
-        if(user_name_exists($UserName)) {
+        if(get_user_by_userName($UserName)) {
             $error_messages[] = "This User Name is already in use.";        
         }
 
@@ -194,7 +194,6 @@ switch ($action) {
         // Populate the DOM with user info
         $UserName = $customer['UserName'];
 
-        echo $UserName;
         // Show the profile edit
         include('account/user_edit_form.php');
 
