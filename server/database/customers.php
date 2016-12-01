@@ -48,7 +48,7 @@ function create_customer($FirstName, $LastName, $Address1, $Address2, $City, $St
 
     $query = '
         INSERT INTO Customer (FirstName, LastName, Address1, Address2, City, State, Zip, Email, AppUserId) 
-        VALUES( :firstName, :lastName, :address1, :address2, :city, :state, :zip, :email, :userId )';
+        VALUES( :firstName, :lastName, :address1, :address2, :city, :state, :zip, :email, :appUserId )';
 
     try {
         $statement = $db->prepare($query);

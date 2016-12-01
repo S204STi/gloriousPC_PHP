@@ -1,8 +1,6 @@
 <!--this page is delivered by index.php-->
 <h1>Your Credentials</h1>
 
-<p>Enter new passwords to change</p>
-
 <div class="form-wrapper">
     <form action="account/index.php" method="post">
 

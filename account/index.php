@@ -82,8 +82,9 @@ switch ($action) {
         if(empty($error_messages)){
             
             // Success! Create customer
-            $user = create_user($UserName, $Password);
-            create_customer($FirstName, $LastName, $Address1, $Address2, $City, $State, $Zip, $Email, $user['AppUserId']);
+            $userId = create_user($UserName, $Password);
+
+            create_customer($FirstName, $LastName, $Address1, $Address2, $City, $State, $Zip, $Email, $userId);
 
             // login
             login($UserName, $Password);
