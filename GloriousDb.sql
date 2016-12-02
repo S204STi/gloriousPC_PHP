@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 -- Database: `GloriousDb`
 --
 
+CREATE DATABASE IF NOT EXISTS `GloriousDb`;
+USE `GloriousDb`;
 -- --------------------------------------------------------
 
 --
