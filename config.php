@@ -1,10 +1,21 @@
 <?php 
 
 function get_web_root() {
-    // Get the application path
+    // Get the application file path
     $uri = substr( __FILE__, strlen( $_SERVER[ 'DOCUMENT_ROOT' ] ) );
+
+    // Split for unix
     $dirs = explode('/', $uri);
-    $app_path = '/' . $dirs[1] . '/';
+
+    try {
+        // make an absolute url that points to the base of the app
+        $app_path = '/' . $dirs[1] . '/';
+    } catch (Exception $e) {
+        // Split for windows in case the unix version doesn't work.'
+        $dirs = explode('\\', $uri);
+        $app_path = '/' . $dirs[1] . '/';
+    }
+    
     return $app_path;
 }
 

@@ -35,6 +35,7 @@ if ($action == NULL) {
     }
 }
 
+// This switch controls what action the page is responding to
 switch ($action) {
 
     // Logout the user
