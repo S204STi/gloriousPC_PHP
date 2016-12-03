@@ -10,6 +10,7 @@ $product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
 
 $product = get_product($product_id);
 
+// Filter everything for display.
 $product_name = htmlspecialchars($product['ProductName']);
 $image_path = htmlspecialchars($product['ImagePath']);
 $product_desc = htmlspecialchars($product['Description']);
@@ -32,7 +33,7 @@ $product_price = '$' . number_format($product['PriceEach'], 2);
             <div>
 
                 <?php
-
+                // If in stock show button, else show an out of stock message.
                 if($product["Stock"] > 0) {
                     echo <<<HTML
                     <form action="cart/index.php" method="post" 

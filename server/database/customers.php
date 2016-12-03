@@ -5,8 +5,9 @@ function get_customer_by_user_id($AppUserId) {
     global $db;
 
     $query = '
-        SELECT * FROM Customer c
-            INNER JOIN AppUser u
+        SELECT * 
+        FROM Customer c
+        INNER JOIN AppUser u
             ON c.AppUserId = u.AppUserId
         WHERE c.AppUserId = :appUserId';
 
@@ -47,8 +48,10 @@ function create_customer($FirstName, $LastName, $Address1, $Address2, $City, $St
     global $db;
 
     $query = '
-        INSERT INTO Customer (FirstName, LastName, Address1, Address2, City, State, Zip, Email, AppUserId) 
-        VALUES( :firstName, :lastName, :address1, :address2, :city, :state, :zip, :email, :appUserId )';
+        INSERT INTO Customer(
+            FirstName, LastName, Address1, Address2, City, State, Zip, Email, AppUserId) 
+        VALUES( 
+            :firstName, :lastName, :address1, :address2, :city, :state, :zip, :email, :appUserId )';
 
     try {
         $statement = $db->prepare($query);
@@ -76,8 +79,9 @@ function update_customer($FirstName, $LastName, $Address1, $Address2, $City, $St
 
     $query = '
         UPDATE Customer  
-        SET FirstName = :firstName, LastName = :lastName, Address1 = :address1, 
-            Address2 = :address2, City = :city, State = :state, 
+        SET FirstName = :firstName, LastName = :lastName, 
+            Address1 = :address1, Address2 = :address2, 
+            City = :city, State = :state, 
             Zip = :zip, Email = :email
         WHERE AppUserId = :appUserId';
 

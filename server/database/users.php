@@ -7,7 +7,8 @@ function get_user_by_login($userName, $password) {
 
     $query = '
         SELECT * FROM AppUser
-        WHERE UserName = :userName AND Password = :password';
+        WHERE UserName = :userName 
+            AND Password = :password';
 
     try {
         $statement = $db->prepare($query);
@@ -49,8 +50,10 @@ function create_user($userName, $password) {
     $password = sha1($userName . $password);
 
     $query = '
-        INSERT INTO AppUser (UserName, Password) 
-        VALUES( :userName, :password )';
+        INSERT INTO AppUser (
+            UserName, Password) 
+        VALUES( 
+            :userName, :password )';
 
     try {
         $statement = $db->prepare($query);

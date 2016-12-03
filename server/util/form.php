@@ -41,28 +41,28 @@ class Form {
         return $errors;
     }
 
-    // Various fields that will be validated on creation.
+    // The following functions represent various fields that will be validated on creation.
     public function text($var_name, $ui_name, $value, $required = TRUE, $min_length = 1, $max_length = 255) {
         
-        $message = NULL;
+        $fail_message = NULL;
         $has_error = FALSE;
 
         // Check that the string exists and falls between the lengths set.
         if(!$required && empty($value)) {
             // Jump to the bottom
         } else if($required && empty($value)) {
-            $message = $ui_name . " is required.";
+            $fail_message = "$ui_name is required.";
             $has_error = TRUE;
         } else if (strlen($value) < $min_length) {
-            $message = $ui_name . " is too short. Keep it between ". $min_length . " and " . $max_length . ".";
+            $fail_message = $ui_name . " is too short. Keep it between ". $min_length . " and " . $max_length . ".";
             $has_error = TRUE;
         } else if (strlen($value) > $max_length) {
-            $message = $ui_name . " is too long. Keep it between ". $min_length . " and " . $max_length . ".";
+            $fail_message = $ui_name . " is too long. Keep it between ". $min_length . " and " . $max_length . ".";
             $has_error = TRUE;
         }
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $message);
+        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;
@@ -70,19 +70,26 @@ class Form {
 
     public function email($var_name, $ui_name, $value, $required = TRUE) {
         
-        $message = NULL;
+        $fail_message = NULL;
         $has_error = FALSE;
 
         // Just use PHP's email validate
         $is_email = filter_var($value, FILTER_VALIDATE_EMAIL);
 
-        if($is_email === FALSE) {
-            $message = $ui_name . " is not valid.";
-            $has_error = TRUE;
+        if(!empty($value)) {
+            if($is_email === FALSE) {
+                $fail_message = "Invalid $ui_name.";
+                $has_error = TRUE;
+            }
+        } else {
+            if($required) {
+                $fail_message = "$ui_name is required.";
+                $has_error = TRUE;
+            }
         }
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $message);
+        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;
@@ -92,10 +99,8 @@ class Form {
 
         $pattern = '/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/';
 
-        $fail_message = "Invalid phone number.";
-
         // Generic pattern will handle creating the new field.
-        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern, $fail_message);
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
         
         return $pattern_match;
     }
@@ -105,7 +110,7 @@ class Form {
         // one lower, one upper, one digit, one symbol, between min and max length
         $pattern = '/^.*(?=.{' . $min_length . ',' . $max_length . '})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&? "]).*$/';
 
-        $fail_message = "Password must contain one number, special symbol, upper-case letter, and lower-case letter. It must also be between " . $min_length . " to " . $max_length . " characters.";
+        $fail_message = $ui_name . " must contain one number, special symbol, upper-case letter, and lower-case letter. It must also be between " . $min_length . " to " . $max_length . " characters.";
 
         $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern, $fail_message);
 
@@ -131,7 +136,7 @@ class Form {
 
     public function state($var_name, $ui_name, $value, $required = TRUE) {
 
-        // An array of valid state abbr
+        // An array of valid state abbreviations
         $states = array(
             'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC',
             'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY',
@@ -143,47 +148,95 @@ class Form {
 
         $pattern = '/^(' . $states . ')$/';
 
-        $fail_message = "Invalid state.";
-
         // Generic pattern will handle creating the new field.
-        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern, $fail_message);
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
         
         return $pattern_match;
     }
 
     public function zip($var_name, $ui_name, $value, $required = TRUE) {
 
+        // match 5 digits and an optional dash with 4 digits
         $pattern = '/^\d{5}(?:[-\s]\d{4})?$/';
 
-        $fail_message = "Invalid zip code.";
-
         // Generic pattern will handle creating the new field.
-        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern, $fail_message);
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
         
         return $pattern_match;
     }
 
-    public function pattern($var_name, $ui_name, $value, $required = TRUE, $pattern, $fail_message) {
+    public function cardNumber($var_name, $ui_name, $value, $required = TRUE) {
+
+        // match 16 digits
+        $pattern = '/^(\d{4}(?:[-\\s])?){4}$/';
+
+        // Generic pattern will handle creating the new field.
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
         
-        $message = NULL;
-        $has_error = FALSE;
+        return $pattern_match;
+    }
 
-        // If the field is required and not empty, check the pattern
-        if ($required || !empty($value)) {
+    public function ccv($var_name, $ui_name, $value, $required = TRUE) {
 
-            // Check field and set or clear error message
-            $match = preg_match($pattern, $value);
-            if ($match === FALSE) {
-                $message = 'Error testing ' . $ui_name . '.';
-            } else if ( $match != 1 ) {
-                // Pattern was not matched
-                $message = $fail_message;
-                $has_error = TRUE;
-            }
+        // match 3 digits
+        $pattern = '/^\d{3}$/';        
+        
+        // Generic pattern will handle creating the new field.
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
+        
+        return $pattern_match;
+    }
+
+    public function monthYear($var_name, $ui_name, $value, $required = TRUE) {
+        
+        // match 2 digits, a slash then 4 digits
+        $pattern = '/^\d{2}\/\d{4}$/';        
+        
+        // Generic pattern will handle creating the new field.
+        $pattern_match = $this->pattern($var_name, $ui_name, $value, $required, $pattern);
+        
+        return $pattern_match;
+    }
+
+    public function pattern($var_name, $ui_name, $value, $required = TRUE, $pattern, $fail_message = NULL) {
+        
+        // If the user didn't pass in a fail message use this default one.
+        if($fail_message === NULL) {
+            $fail_message = "Invalid $ui_name.";
         }
 
+        $has_error = FALSE;
+
+        // If the field has something in it, we check it
+        if(!empty($value)) {
+
+                // Check field and set or clear error message
+                $match = preg_match($pattern, $value);
+
+                // If the regex threw an error, let the user know
+                if ($match === FALSE) {
+                    $fail_message = 'Error testing ' . $ui_name . '.';
+                    $has_error = TRUE;
+
+                // If the pattern was not matched
+                } else if ( $match != 1 ) {
+                    $has_error = TRUE;
+
+                // Field is valid, empty the message
+                } else {
+                    $fail_message = NULL;
+                }
+        } else {
+
+            // If the field is empty and required then throw and error.
+            if($required) {
+                $fail_message = "$ui_name is required.";
+                $has_error = TRUE;
+            }
+        } 
+
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $message);
+        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;

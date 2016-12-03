@@ -138,10 +138,6 @@ main {
     margin: 0 0 2em 0;
 }
 
-main h1:nth-child(1) {
-    margin-bottom: 1.5em;
-}
-
 footer {
     border-top: 2px solid grey;
     padding: 1.4em;

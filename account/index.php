@@ -1,13 +1,12 @@
 <?php
 // needed on all pages
 require_once('../config.php');
-include('server/view/header.php');
 
 require_once('server/util/form.php');
 require_once('server/database/customers.php');
 require_once('server/database/users.php');
 
-// Get the values, these can be used to remember user input between validation failures.
+// Get all values this page might use, these can be used to remember user input between validation failures.
 $UserName = filter_input(INPUT_POST, 'UserName');
 $Password = filter_input(INPUT_POST, 'Password');
 $Password2 = filter_input(INPUT_POST, 'Password2');
@@ -96,7 +95,7 @@ switch ($action) {
         } else {
 
             // Failure, show the register form again
-            include('account/register_form.php');
+            include('account/register_view.php');
         }
 
         break;
@@ -117,7 +116,7 @@ switch ($action) {
 
         $error_messages = $form->getErrorMessages();
 
-        $current_user_id = $_SESSION['user']['AppUserId'];
+        $current_user_id = $_SESSION['user'];
 
         if(empty($error_messages)){
             
@@ -127,7 +126,7 @@ switch ($action) {
         } else {
 
             // Failure, show the update form again
-            include('account/profile_edit_form.php');
+            include('account/profile_edit_view.php');
         }
 
         break;
@@ -143,7 +142,7 @@ switch ($action) {
         $error_messages = $form->getErrorMessages();
 
         $existing_user = get_user_by_userName($UserName);
-        $current_user_id = $_SESSION['user']['AppUserId'];
+        $current_user_id = $_SESSION['user'];
 
         // If the username exists and it doesn't belong to this user, we can't use that name.
         if(!empty($existing_user) && $existing_user['AppUserId'] != $current_user_id) {
@@ -158,7 +157,7 @@ switch ($action) {
         } else {
             
             // Failure, show the update form again
-            include('account/user_edit_form.php');
+            include('account/user_edit_view.php');
         }
 
         break;
@@ -166,13 +165,13 @@ switch ($action) {
     case 'view_register':
 
         // Show the register form
-        include('account/register_form.php');
+        include('account/register_view.php');
 
         break;
 
     case 'view_profile':
 
-        $customer = get_customer_by_user_id($_SESSION['user']['AppUserId']);
+        $customer = get_customer_by_user_id($_SESSION['user']);
 
         // Populate the DOM with customer info
         $FirstName = $customer['FirstName'];
@@ -185,19 +184,19 @@ switch ($action) {
         $Email = $customer['Email'];
 
         // Show the profile edit
-        include('account/profile_edit_form.php');
+        include('account/profile_edit_view.php');
 
         break;
 
     case 'view_user':
 
-        $customer = get_customer_by_user_id($_SESSION['user']['AppUserId']);
+        $customer = get_customer_by_user_id($_SESSION['user']);
 
         // Populate the DOM with user info
         $UserName = $customer['UserName'];
 
         // Show the profile edit
-        include('account/user_edit_form.php');
+        include('account/user_edit_view.php');
 
         break;
 
@@ -205,7 +204,7 @@ switch ($action) {
     default:
 
         // Default if no action sent and not logged in, show login form
-        include('account/login_form.php');
+        include('account/login_view.php');
         break;
 }
 
@@ -217,14 +216,15 @@ function login($userName, $password) {
     if($user == NULL) {
 
         $error_messages[] = "Invalid User Name or Password. Try again.";
-        include('account/login_form.php');
+        include('account/login_view.php');
 
     } else  {
 
+        // Set the user Id in the session
         if($user['IsAdmin'] == TRUE) {
-            $_SESSION['admin'] = $user;
+            $_SESSION['admin'] = $user['AppUserId'];
         } else {
-            $_SESSION['user'] = get_customer_by_user_id($user['AppUserId']);
+            $_SESSION['user'] = $user['AppUserId'];
         }
 
         // If successful go home.
@@ -248,10 +248,3 @@ function logout() {
     // Destroy the session.
     session_destroy();
 }
-
-function go_home() {
-    header( 'Location: ' . WEB_ROOT );
-}
-
-include('server/view/footer.php'); 
-?>

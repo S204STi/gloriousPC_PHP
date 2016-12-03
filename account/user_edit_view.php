@@ -1,5 +1,9 @@
+<?php include('server/view/header.php'); ?>
+
 <!--this page is delivered by index.php-->
 <h1>Your Credentials</h1>
+
+<p>Change your user name and password.</p>
 
 <div class="form-wrapper">
     <form action="account/index.php" method="post">
@@ -24,3 +28,5 @@
         <button type="submit"><span class="fa fa-arrow-left"></span>&nbsp; Profile</button>
     </form>
 </div>
+
+<?php include('server/view/footer.php'); ?>

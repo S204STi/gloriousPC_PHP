@@ -11,7 +11,7 @@ function get_web_root() {
         // make an absolute url that points to the base of the app
         $app_path = '/' . $dirs[1] . '/';
     } catch (Exception $e) {
-        // Split for windows in case the unix version doesn't work.'
+        // Split for windows in case the unix version doesn't work.
         $dirs = explode('\\', $uri);
         $app_path = '/' . $dirs[1] . '/';
     }
@@ -26,6 +26,11 @@ define("WEB_ROOT", get_web_root());
 
 // Set the include path to the root of the project, which is the directory of this file.
 set_include_path(APP_ROOT);
+
+// Easy button for redirecting home
+function go_home() {
+    header( 'Location: ' . WEB_ROOT );
+}
 
 // Include common code
 require_once('server/errors/error_routes.php');

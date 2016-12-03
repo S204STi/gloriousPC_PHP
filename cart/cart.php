@@ -54,7 +54,7 @@ function cart_get_items() {
 
         // Store data in items array
         $items[$product_id] = $product;
-        $items[$product_id]['Quantity'] = intval($quantity);
+        $items[$product_id]['Quantity'] = $quantity;
         $items[$product_id]['LinePrice'] = $line_price;
     }
     return $items;

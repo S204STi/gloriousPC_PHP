@@ -6,7 +6,7 @@
       <?php
 
         require_once('server/database/categories.php');
-        require_once('server/database/cart.php');
+        require_once('cart/cart.php');
 
         // Dynamically create the product menu with an item for each category that exists in the db
         $categories = get_all_categories();
@@ -15,9 +15,7 @@
           $category_name = htmlspecialchars($category['CategoryName']);
           $category_id = htmlspecialchars($category['CategoryId']);
 
-        echo <<<HTML
-          <li><a href="products/index.php?category_id=$category_id">$category_name</a></li>
-HTML;
+          echo "<li><a href='products/index.php?category_id=$category_id'>$category_name</a></li>";
         }
       ?>
 

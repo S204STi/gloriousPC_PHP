@@ -1,17 +1,14 @@
 <?php  
 // needed on all pages
 require_once('config.php');
-include('server/view/header.php');
 
 // Page dependencies
 require_once('server/database/products.php');
-?>
 
-<h1>Featured Products</h1>
-<p>GLORIOUS PC stocks the best parts for all your computing needs!</p>
+$list_title = "Featured Products";
+$list_description = "GLORIOUS PC stocks the best parts for all your computing needs!";
 
-<?php 
-$product_ids = array(1, 2, 3);
+$product_ids = array(1, 3);
 
 $products = array();
 
@@ -20,8 +17,6 @@ foreach ($product_ids as $product_id) {
     $products[] = $product;
 }
 
-require_once('products/product_card.php');
-
-include('server/view/footer.php'); 
+require_once('products/list_view.php');
 
 ?>
