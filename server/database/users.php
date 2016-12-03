@@ -6,7 +6,7 @@ function get_user($AppUserId) {
     
     $query = '
             SELECT * FROM AppUser
-            WHERE AppUserId = :appUserId';
+            WHERE AppUserId = :appUserId;';
 
         try {
             $statement = $db->prepare($query);
@@ -30,7 +30,7 @@ function get_user_by_login($UserName, $Password) {
     $query = '
         SELECT * FROM AppUser
         WHERE UserName = :userName 
-            AND Password = :password';
+            AND Password = :password;';
 
     try {
         $statement = $db->prepare($query);
@@ -52,7 +52,7 @@ function get_user_by_userName($UserName) {
 
     $query = '
         SELECT * FROM AppUser
-        WHERE UserName = :userName';
+        WHERE UserName = :userName;';
 
     try {
         $statement = $db->prepare($query);
@@ -77,7 +77,7 @@ function create_user($UserName, $Password, $IsAdmin = FALSE) {
         INSERT INTO AppUser (
             UserName, Password, IsAdmin) 
         VALUES( 
-            :userName, :password, :isAdmin )';
+            :userName, :password, :isAdmin );';
 
     try {
         $statement = $db->prepare($query);
@@ -103,7 +103,7 @@ function update_user($UserName, $Password, $AppUserId) {
     $query = '
         UPDATE AppUser  
         SET UserName = :userName, Password = :password 
-        WHERE AppUserId = :appUserId';
+        WHERE AppUserId = :appUserId;';
 
     try {
         $statement = $db->prepare($query);

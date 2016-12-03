@@ -46,35 +46,6 @@ p a:hover, a:active {
     color: darkgoldenrod;
 }
 
-input[type="button"], input[type="submit"], button {
-    padding: .5em;
-    background-color: goldenrod;
-    border: 2px solid #252835;
-    box-shadow: 2px 3px 2px #252835;
-    color: black;
-    font-size: 85%;
-    position: relative;
-    top: -2px;
-    min-width: 5em;
-    cursor: pointer;
-}
-
-input[type="button"]:active, input[type="submit"]:active, button:active {
-    background-color: darkgoldenrod;
-    box-shadow: 1px 1px 2px #252835;
-    top: 2px;
-}
-
-label {
-    padding: .5em;
-}
-
-input[type="password"], input[type="text"] {
-    padding: .6em;
-    border: 2px solid grey;
-    font-size: 85%;
-}
-
 nav ul a:link, nav ul a:visited {
     color: white;
 }
@@ -269,9 +240,23 @@ table td div {
     margin-top: 3em;
 }
 
+.form-wrapper form button {
+    margin-left: 12.5em;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    
+    margin-bottom: 2em;
+}
+
 .form-group label {
     float: left;
-    width: 7em;
+    width: 9em;
     margin-right: .5em;
     text-align: right;
     white-space: nowrap;
@@ -279,24 +264,57 @@ table td div {
     text-overflow: ellipsis;
 }
 
-.form-group input {
+.form-group input{
     box-sizing: border-box;
     width: 20em;
-    margin-bottom: 2em;
+}
+
+ .form-group textarea {
+     width: 20em;
+     height: 20em;
+     font-family: "Source Sans Pro", sans-serif;
+ }
+
+input[type="button"], input[type="submit"], button {
+    padding: .5em;
+    background-color: goldenrod;
+    border: 2px solid #252835;
+    box-shadow: 2px 3px 2px #252835;
+    color: black;
+    font-size: 85%;
+    position: relative;
+    top: -2px;
+    min-width: 5em;
+    cursor: pointer;
+}
+
+input[type="button"]:active, input[type="submit"]:active, button:active {
+    background-color: darkgoldenrod;
+    box-shadow: 1px 1px 2px #252835;
+    top: 2px;
+}
+
+label {
+    padding: .5em;
+}
+
+input[type="password"], input[type="number"], input[type="text"], textarea {
+    padding: .6em;
+    border: 2px solid grey;
+    font-size: 85%;
+}
+
+input.chk {
+    height: 1.5em;
+    width: 1.5em;
+    padding: .5em;
+    top: .4em;
+    position: relative;
 }
 
 ul.error {
     max-width: 30em;
     margin-bottom: 2em;
-}
-
-.form-wrapper form button {
-    margin-left: 10em;
-}
-
-.form-wrapper {
-    display: flex;
-    justify-content: center;
 }
 
 /* PCMR mode for UHD 4k screens */

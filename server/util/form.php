@@ -42,7 +42,7 @@ class Form {
     }
 
     // The following functions represent various fields that will be validated on creation.
-    public function text($var_name, $ui_name, $value, $required = TRUE, $min_length = 1, $max_length = 255) {
+    public function text($var_name, $ui_name, $value, $required = TRUE, $min_length = 1, $max_length = 100) {
         
         $fail_message = NULL;
         $has_error = FALSE;
@@ -62,11 +62,101 @@ class Form {
         }
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;
     }
+
+    public function int($var_name, $ui_name, $value, $required = TRUE, $min = 0, $max = 10000000) {
+    
+        $fail_message = NULL;
+        $has_error = FALSE;
+
+        // Just use PHP's validate
+        $is_int = filter_var($value, FILTER_VALIDATE_INT);
+        $value = $is_int;
+
+        if(!empty($value)) {
+            if($is_int === FALSE) {
+                $fail_message = "Invalid $ui_name.";
+                $has_error = TRUE;
+            } else if ($is_int < $min) {
+                $fail_message = $ui_name . " is too low. Keep it between ". $min . " and " . $max . ".";
+                $has_error = TRUE;
+            } else if ($is_int > $max) {
+                $fail_message = $ui_name . " is too high. Keep it between ". $min . " and " . $max . ".";
+                $has_error = TRUE;
+            }
+        } else {
+            if($required) {
+                $fail_message = "$ui_name is required.";
+                $has_error = TRUE;
+            }
+        }
+
+        // Add the field to the array.
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
+        $this->fields[$var_name] = $field;
+
+        return $field;
+    }   
+
+    public function float($var_name, $ui_name, $value, $required = TRUE, $min = 0, $max_length = 10000000) {
+        
+        $fail_message = NULL;
+        $has_error = FALSE;
+
+        // Just use PHP's validate
+        $is_float = filter_var($value, FILTER_VALIDATE_FLOAT);
+        $value = $is_float;
+
+        if(!empty($value)) {
+            if($is_float === FALSE) {
+                $fail_message = "Invalid $ui_name.";
+                $has_error = TRUE;
+            } else if ($is_float < $min) {
+                $fail_message = $ui_name . " is too low. Keep it between ". $min . " and " . $max . ".";
+                $has_error = TRUE;
+            } else if ($is_float > $max) {
+                $fail_message = $ui_name . " is too high. Keep it between ". $min . " and " . $max . ".";
+                $has_error = TRUE;
+            }
+        } else {
+            if($required) {
+                $fail_message = "$ui_name is required.";
+                $has_error = TRUE;
+            }
+        }
+
+        // Add the field to the array.
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
+        $this->fields[$var_name] = $field;
+
+        return $field;
+
+    } 
+
+    public function boolean($var_name, $ui_name, $value) {
+        
+        $fail_message = NULL;
+        $has_error = FALSE;
+
+        // Just use PHP's validate, this will return null if not a direct boolean value
+        $value = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        if($value === NULL) {
+            $fail_message = "Invalid $ui_name.";
+            $has_error = TRUE;
+        }
+
+        // Add the field to the array.
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
+        $this->fields[$var_name] = $field;
+
+        return $field;
+
+    }  
 
     public function email($var_name, $ui_name, $value, $required = TRUE) {
         
@@ -89,7 +179,7 @@ class Form {
         }
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;
@@ -128,7 +218,7 @@ class Form {
         }
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $message);
+        $field = new Field($var_name, $ui_name, '', $has_error, $message);
         $this->fields[$var_name] = $field;
 
         return $field;
@@ -236,7 +326,7 @@ class Form {
         } 
 
         // Add the field to the array.
-        $field = new Field($var_name, $ui_name, $has_error, $fail_message);
+        $field = new Field($var_name, $ui_name, $value, $has_error, $fail_message);
         $this->fields[$var_name] = $field;
 
         return $field;
@@ -245,13 +335,15 @@ class Form {
 
 class Field {
     public $varName = '';
+    public $value = NULL;
     public $uiName = '';
     public $hasError = FALSE;
     public $message = '';
 
-    public function __construct($var_name, $ui_name, $has_error = FALSE, $message = NULL) {
+    public function __construct($var_name, $ui_name, $value, $has_error = FALSE, $message = NULL) {
         $this->varName = $var_name;
         $this->uiName = $ui_name;
+        $this->value = $value;
         $this->hasError = $has_error;
         $this->message = $message;
     }
