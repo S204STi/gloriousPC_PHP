@@ -5,7 +5,7 @@
       <a href="account/index.php?action=view_profile">Profile</a>
     </li>
     <li>
-      <a href="account/orders.php">Orders</a>
+      <a href="orders/index.php">Orders</a>
     </li>
   </ul>
 </li>

@@ -6,6 +6,6 @@ include('server/view/header.php');
 
 <h1>Your Orders</h1>
 
-<p>Stuff here.</p>
+<p>List customer orders.</p>
 
 <?php include('server/view/footer.php'); ?>

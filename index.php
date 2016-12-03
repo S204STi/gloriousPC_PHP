@@ -18,5 +18,4 @@ foreach ($product_ids as $product_id) {
 }
 
 require_once('products/list_view.php');
-
 ?>

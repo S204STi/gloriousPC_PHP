@@ -1,9 +1,31 @@
 <?php 
 
-function get_user_by_login($userName, $password) {
+// Used to pullup user information for someone logged in
+function get_user($AppUserId) {
+    global $db;
+    
+    $query = '
+            SELECT * FROM AppUser
+            WHERE AppUserId = :appUserId';
+
+        try {
+            $statement = $db->prepare($query);
+            $statement->bindValue(':appUserId', $AppUserId);
+            $statement->execute();
+            $user = $statement->fetch();
+            $statement->closeCursor();
+            return $user;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            display_db_error($error_message);
+        }
+}
+
+// Used for logging in 
+function get_user_by_login($UserName, $Password) {
     global $db;
 
-    $password = sha1($userName . $password);
+    $Password = sha1($UserName . $Password);
 
     $query = '
         SELECT * FROM AppUser
@@ -12,8 +34,8 @@ function get_user_by_login($userName, $password) {
 
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':userName', $userName);
-        $statement->bindValue(':password', $password);
+        $statement->bindValue(':userName', $UserName);
+        $statement->bindValue(':password', $Password);
         $statement->execute();
         $user = $statement->fetch();
         $statement->closeCursor();
@@ -24,7 +46,8 @@ function get_user_by_login($userName, $password) {
     }
 }
 
-function get_user_by_userName($userName) {
+// Used to check for conflicting usernames.
+function get_user_by_userName($UserName) {
     global $db;
 
     $query = '
@@ -33,7 +56,7 @@ function get_user_by_userName($userName) {
 
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':userName', $userName);
+        $statement->bindValue(':userName', $UserName);
         $statement->execute();
         $user = $statement->fetch();
         $statement->closeCursor();
@@ -44,21 +67,23 @@ function get_user_by_userName($userName) {
     }
 }
 
-function create_user($userName, $password) {
+// Make a new user
+function create_user($UserName, $Password, $IsAdmin = FALSE) {
     global $db;
 
-    $password = sha1($userName . $password);
+    $Password = sha1($UserName . $Password);
 
     $query = '
         INSERT INTO AppUser (
-            UserName, Password) 
+            UserName, Password, IsAdmin) 
         VALUES( 
-            :userName, :password )';
+            :userName, :password, :isAdmin )';
 
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':userName', $userName);
-        $statement->bindValue(':password', $password);
+        $statement->bindValue(':userName', $UserName);
+        $statement->bindValue(':password', $Password);
+        $statement->bindValue(':isAdmin', $IsAdmin);
         $statement->execute();
         $userId = $db->lastInsertId();
         $statement->closeCursor();
@@ -69,10 +94,11 @@ function create_user($userName, $password) {
     }
 }
 
-function update_credentials($userName, $password, $appUserId) {
+// Update the user, they cannot change their admin status
+function update_user($UserName, $Password, $AppUserId) {
     global $db;
 
-    $password = sha1($userName . $password);
+    $Password = sha1($UserName . $Password);
 
     $query = '
         UPDATE AppUser  
@@ -81,9 +107,9 @@ function update_credentials($userName, $password, $appUserId) {
 
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':userName', $userName);
-        $statement->bindValue(':password', $password);
-        $statement->bindValue(':appUserId', $appUserId);
+        $statement->bindValue(':userName', $UserName);
+        $statement->bindValue(':password', $Password);
+        $statement->bindValue(':appUserId', $AppUserId);
         $statement->execute();
         $userId = $db->lastInsertId();
         $statement->closeCursor();

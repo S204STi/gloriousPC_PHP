@@ -12,6 +12,7 @@
         $categories = get_all_categories();
 
         foreach($categories as $category) {
+          
           $category_name = htmlspecialchars($category['CategoryName']);
           $category_id = htmlspecialchars($category['CategoryId']);
 

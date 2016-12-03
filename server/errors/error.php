@@ -1,2 +1,2 @@
 <h1>Error</h1>
-<p><?php $error_message; ?></p>
+<p><?php echo $error_message; ?></p>

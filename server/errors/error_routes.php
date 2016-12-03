@@ -17,4 +17,9 @@ function redirect($url) {
     exit;
 }
 
+function forbidden() {
+    header('HTTP/1.0 403 Forbidden');
+    display_error("Forbidden: You do not have permission.");
+}
+
 ?>

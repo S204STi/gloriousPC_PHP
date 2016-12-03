@@ -41,18 +41,12 @@ switch ($action) {
     case 'logout':
 
         logout();
-
-        // Go home.            
-        go_home();
-
-
         break;
 
     // Login with the supplied credentials
     case 'login':
 
         login($UserName, $Password);
-
         break;
 
     // Register a new user
@@ -89,15 +83,14 @@ switch ($action) {
             // login
             login($UserName, $Password);
 
-            // Go home
-            go_home();
+            $success_message = "Welcome to Gloriousness!";
+            include('server/view/success.php');
 
         } else {
 
             // Failure, show the register form again
             include('account/register_view.php');
         }
-
         break;
 
     // Edit the customer profile
@@ -122,7 +115,9 @@ switch ($action) {
             
             // Success, change the customer information
             update_customer($FirstName, $LastName, $Address1, $Address2, $City, $State, $Zip, $Email, $current_user_id);
-            go_home();
+
+            $success_message = "Your profile has been updated.";
+            include('server/view/success.php');
         } else {
 
             // Failure, show the update form again
@@ -141,7 +136,7 @@ switch ($action) {
                 
         $error_messages = $form->getErrorMessages();
 
-        $existing_user = get_user_by_userName($UserName);
+        $existing_user = get_user_by_login($UserName);
         $current_user_id = $_SESSION['user'];
 
         // If the username exists and it doesn't belong to this user, we can't use that name.
@@ -152,14 +147,15 @@ switch ($action) {
         if(empty($error_messages)){
             
             // Success, change the credentials
-            update_credentials($UserName, $Password, $current_user_id);
-            go_home();
+            update_user($UserName, $Password, $current_user_id);
+
+            $success_message = "Your credentials have been updated.";
+            include('server/view/success.php');
         } else {
             
             // Failure, show the update form again
             include('account/user_edit_view.php');
         }
-
         break;
 
     case 'view_register':
@@ -247,4 +243,7 @@ function logout() {
 
     // Destroy the session.
     session_destroy();
+
+    // Go home.            
+    go_home();
 }

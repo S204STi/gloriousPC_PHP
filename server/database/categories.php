@@ -2,7 +2,7 @@
 // Database functions for the Category table
 
 // Get single category by id
-function get_category($category_id){
+function get_category($CategoryId){
     global $db;
     
     $query = '
@@ -12,7 +12,7 @@ function get_category($category_id){
     
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':category_id', $category_id);
+        $statement->bindValue(':category_id', $CategoryId);
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
