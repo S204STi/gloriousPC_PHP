@@ -5,6 +5,7 @@ include('server/view/header.php');
 
 // Page dependencies
 require_once('server/database/products.php');
+require_once('server/util/html.php');
 
 $product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
 
@@ -13,7 +14,7 @@ $product = get_product($product_id);
 // Filter everything for display.
 $product_name = htmlspecialchars($product['ProductName']);
 $image_path = htmlspecialchars($product['ImagePath']);
-$product_desc = htmlspecialchars($product['Description']);
+$product_desc = html_tags(htmlspecialchars($product['Description']));
 
 $product_price = '$' . number_format($product['PriceEach'], 2);
 
@@ -26,7 +27,9 @@ $product_price = '$' . number_format($product['PriceEach'], 2);
     </div>
     <div>
         <p><strong>Description:</strong></p>
-        <p class="description"><?php echo $product_desc ?></p>
+        <div class="description">
+            <p><?php echo $product_desc ?></p>
+        </div>
         <div class="cart-controls">
             <div class="loud">Price:&nbsp;<strong class="gold"><?php echo $product_price ?></strong></div>
         

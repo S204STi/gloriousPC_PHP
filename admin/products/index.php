@@ -76,7 +76,7 @@ switch ($action) {
         } else {
             
             // Failure, show the update form again
-            include('admin/products/product_edit_view.php');
+            include('admin/products/edit_view.php');
         }
         break;
 
@@ -113,7 +113,7 @@ switch ($action) {
         } else {
             
             // Failure, show the update form again
-            include('admin/products/product_edit_view.php');
+            include('admin/products/edit_view.php');
         }
         break;
 
@@ -123,7 +123,7 @@ switch ($action) {
         $ProductName = $product['ProductName'];
 
         if(empty($ProductName)) {
-            display_error("That prodcut doesn't exist.");
+            display_error("That product doesn't exist.");
         } else {
             delete_product($ProductId);
 
@@ -147,7 +147,7 @@ switch ($action) {
         $CategoryId = $product['CategoryId'];
         $IsFeatured = $product['IsFeatured'];
 
-        include('admin/products/product_edit_view.php');
+        include('admin/products/edit_view.php');
 
         break;
 
@@ -156,15 +156,15 @@ switch ($action) {
 
         $product = get_product($ProductId);
         
-        $ProductName = $product['ProductName'];
-        $Description = $product['Description'];
-        $Stock = $product['Stock'];
-        $PriceEach = $product['PriceEach'];
-        $ImagePath = $product['ImagePath'];
-        $CategoryId = $product['CategoryId'];
-        $IsFeatured = $product['IsFeatured'];
+        $ProductName = '';
+        $Description = '';
+        $Stock = '';
+        $PriceEach = '';
+        $ImagePath = '';
+        $CategoryId = '';
+        $IsFeatured = '';
 
-        include('admin/products/product_add_view.php');
+        include('admin/products/add_view.php');
 
         break;
 

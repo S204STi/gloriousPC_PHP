@@ -8,7 +8,7 @@ function get_product($ProductId) {
     $query = '
         SELECT *
         FROM Product as p
-        INNER JOIN Category AS pc 
+        LEFT OUTER JOIN Category AS pc 
             ON pc.CategoryId = p.CategoryId
         WHERE p.ProductId = :product_id;';
     
