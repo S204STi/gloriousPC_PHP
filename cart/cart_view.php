@@ -7,46 +7,56 @@
   <?php else: ?>
         <form action="cart/index.php" method="post" id="cart-table">
             <input type="hidden" name="action" value="update">
-            <table class="cart-table" cellspacing="0">
-            <tr>
-                <th class="text-left"></th>
-                <th class="text-right">Price</th>
-                <th class="text-right">Quantity</th>
-                <th class="text-right">Total</th>
-            </tr>
-            <?php foreach ($cart as $product_id => $item) : ?>
-            <tr>
-                <td>
-                    <a href="products/index.php?product_id=<?php echo $product_id ?>">
-                        <div>
-                            <strong><?php echo htmlspecialchars($item['ProductName']); ?><strong>
-                        </div>
-                    </a>
-                </td>
-                <td class="text-right">
-                    <?php echo sprintf('$%.2f', $item['PriceEach']); ?>
-                </td>
-                <td class="text-right qty-col">
-                    <input type="text" class="text-right"
-                           name="items[<?php echo $product_id; ?>]"
-                           value="<?php echo $item['Quantity']; ?>">
-                </td>
-                <td class="text-right">
-                    <?php echo sprintf('$%.2f', $item['LinePrice']); ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-            <tr id="cart-table-footer" >
-                <td colspan="3" class="text-right loud" ><b>Subtotal</b></td>
-                <td class="text-right gold loud"><strong>
-                    <?php echo sprintf('$%.2f', cart_subtotal()); ?>
-                </strong></td>
-            </tr>
-            <tr>
-                <td colspan="4" class="text-right">
-                    <button type="submit" >Update Cart</button>
-                </td>
-            </tr>
+            <table class="table" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-left">Item</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Quantity</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cart as $product_id => $item) : ?>
+                    <tr>
+                        <td>
+                            <a href="products/product_detail.php?product_id=<?php echo $product_id ?>">
+                                <div>
+                                    <strong><?php echo htmlspecialchars($item['ProductName']); ?><strong>
+                                </div>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <a href="products/product_detail.php?product_id=<?php echo $product_id ?>">
+                                <div>
+                                    <?php echo sprintf('$%.2f', $item['PriceEach']); ?>
+                                </div>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <input type="text" class="text-right small"
+                                name="items[<?php echo $product_id; ?>]"
+                                value="<?php echo $item['Quantity']; ?>">
+                        </td>
+                        <td class="text-right">
+                            <?php echo sprintf('$%.2f', $item['LinePrice']); ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right loud" ><b>Subtotal</b></td>
+                        <td class="text-right gold loud"><strong>
+                            <?php echo sprintf('$%.2f', cart_subtotal()); ?>
+                        </strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right">
+                            <button type="submit" >Update Cart</button>
+                        </td>
+                    </tr>
+                <tfoot>
             </table>
         </form>
         

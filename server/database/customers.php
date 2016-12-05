@@ -97,9 +97,7 @@ function update_customer($FirstName, $LastName, $Address1, $Address2, $City, $St
         $statement->bindValue(':email', $Email);
         $statement->bindValue(':appUserId', $AppUserId);
         $statement->execute();
-        $customerId = $db->lastInsertId();
         $statement->closeCursor();
-        return $customerId;
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);

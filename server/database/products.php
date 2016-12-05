@@ -91,4 +91,79 @@ function get_featured_products() {
     }
 }
 
+function create_product($ProductName, $Description, $Stock, $PriceEach, $ImagePath, $CategoryId, $IsFeatured) {
+        global $db;
+
+    $query = '
+        INSERT INTO Product (
+            ProductName, Description, Stock, PriceEach, ImagePath, CategoryId, IsFeatured)
+        VALUES (
+            :productName, :description, :stock, :priceEach, :imagePath, :categoryId, :isFeatured);';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':productName', $ProductName);
+        $statement->bindValue(':description', $Description);
+        $statement->bindValue(':stock', $Stock);
+        $statement->bindValue(':priceEach', $PriceEach);
+        $statement->bindValue(':imagePath', $ImagePath);
+        $statement->bindValue(':categoryId', $CategoryId);
+        $statement->bindValue(':isFeatured', $IsFeatured);
+        $statement->execute();
+        $productId = $db->lastInsertId();
+        $statement->closeCursor();
+        return $productId;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+function update_product($ProductName, $Description, $Stock, $PriceEach, $ImagePath, $CategoryId, $IsFeatured, $ProductId) {
+        global $db;
+
+    $query = '
+        UPDATE Product  
+        SET ProductName = :productName, Description = :description, 
+            Stock = :stock, PriceEach = :priceEach, 
+            ImagePath = :imagePath, CategoryId = :categoryId, 
+            IsFeatured = :isFeatured
+        WHERE ProductId = :productId;';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':productName', $ProductName);
+        $statement->bindValue(':description', $Description);
+        $statement->bindValue(':stock', $Stock);
+        $statement->bindValue(':priceEach', $PriceEach);
+        $statement->bindValue(':imagePath', $ImagePath);
+        $statement->bindValue(':categoryId', $CategoryId);
+        $statement->bindValue(':isFeatured', $IsFeatured);
+        $statement->bindValue(':productId', $ProductId);        
+        $statement->execute();
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+function delete_product($ProductId) {
+        global $db;
+
+    $query = '
+        DELETE FROM Product
+        WHERE ProductId = :productId;';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':productId', $ProductId);        
+        $statement->execute();
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
 ?>

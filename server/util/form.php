@@ -89,7 +89,7 @@ class Form {
                 $has_error = TRUE;
             }
         } else {
-            if($required) {
+            if($required && $value !== 0) {
                 $fail_message = "$ui_name is required.";
                 $has_error = TRUE;
             }
@@ -102,7 +102,7 @@ class Form {
         return $field;
     }   
 
-    public function float($var_name, $ui_name, $value, $required = TRUE, $min = 0, $max_length = 10000000) {
+    public function float($var_name, $ui_name, $value, $required = TRUE, $min = 0, $max = 10000000) {
         
         $fail_message = NULL;
         $has_error = FALSE;
@@ -123,7 +123,7 @@ class Form {
                 $has_error = TRUE;
             }
         } else {
-            if($required) {
+            if($required && $value !== 0.0) {
                 $fail_message = "$ui_name is required.";
                 $has_error = TRUE;
             }

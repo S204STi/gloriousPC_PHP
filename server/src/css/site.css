@@ -211,22 +211,41 @@ footer {
     width: 2em;
 }
 
-#cart-table, #cart-table > table {
+.table, .container-sm {
     width: 100%;
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#cart-table th {
+.container-sm {
+    padding: 0 .5em;
+}
+
+.table td, .table th {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.table thead th {
     border-bottom: 2px solid grey;
     margin: 0 0;
     font-weight: normal;
 }
 
-#cart-table-footer td {
-    border-top: 2px solid grey;
+.table tfoot td {
     padding: 2em 0;
 }
 
-#cart-table .qty-col input {
+.table tbody tr:last-child td {
+    border-bottom: 2px solid grey;
+}
+
+.table tbody tr:hover {
+    background-color: goldenrod;
+}
+
+input.small {
     width: 3em;
 }
 
@@ -250,7 +269,6 @@ table td div {
 }
 
 .form-group {
-    
     margin-bottom: 2em;
 }
 
@@ -264,7 +282,7 @@ table td div {
     text-overflow: ellipsis;
 }
 
-.form-group input{
+.form-group input, .form-group select {
     box-sizing: border-box;
     width: 20em;
 }
@@ -298,7 +316,7 @@ label {
     padding: .5em;
 }
 
-input[type="password"], input[type="number"], input[type="text"], textarea {
+input[type="password"], input[type="number"], input[type="text"], textarea, select {
     padding: .6em;
     border: 2px solid grey;
     font-size: 85%;

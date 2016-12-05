@@ -13,12 +13,8 @@ $list_description = NULL;
 
 // If no category was requested, show all items
 if ($category_id === NULL) {
-    $product_ids = array(1, 2, 3);
-
-    foreach ($product_ids as $product_id) {
-        $product = get_product($product_id);
-        $products[] = $product;
-    }
+    
+    $products = get_all_products();
             
     $list_title = "All Products";
     $list_description = "Select a category to narrow your search.";

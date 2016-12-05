@@ -5,7 +5,7 @@
 
 <div class="form-group">
     <label for="Description">Description:</label>
-    <textarea name="Description" form="update_product"><?php echo htmlspecialchars($Description) ?></textarea>
+    <textarea id="Description" name="Description"><?php echo htmlspecialchars($Description) ?></textarea>
 </div>
 
 <div class="form-group">
@@ -25,7 +25,12 @@
 
 <div class="form-group">
     <label for="CategoryId">Category:</label>
-    <input type="number" name="CategoryId" value="<?php echo htmlspecialchars($CategoryId) ?>">
+    <select id="CategoryId" name="CategoryId">
+        <?php foreach($categories as $category) { ?>
+            <option value="<?php echo $category['CategoryId'] ?>" 
+                <?php echo ($CategoryId === $category['CategoryId']) ? "selected='selected'" : ""; ?>><?php echo $category['CategoryName'] ?></option>
+        <?php } ?>
+    </select>
 </div>
 
 <div class="form-group">

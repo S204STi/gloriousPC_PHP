@@ -12,7 +12,10 @@ if (!isset($_SESSION['admin'])) {
 }
 
 // Get all values this page might use, these can be used to remember user input between validation failures.
-$ProductId = filter_input(INPUT_GET, 'ProductId');
+$ProductId = filter_input(INPUT_GET, 'product_id');
+if($ProductId === NULL) {
+    $ProductId = filter_input(INPUT_POST, 'ProductId');
+}
 $ProductName = filter_input(INPUT_POST, 'ProductName');
 $Description = filter_input(INPUT_POST, 'Description');
 $Stock = filter_input(INPUT_POST, 'Stock');
@@ -56,16 +59,16 @@ switch ($action) {
         $error_messages = $form->getErrorMessages();
 
         // Check categoryId exists
-        $category = get_category($CategoryId);
+        $existing_category = get_category($CategoryId);
         
-        if($category === NULL) {
+        if($existing_category === NULL) {
             $error_messages[] = "Category doesn't exist.";
         }
 
         if(empty($error_messages)){
             
             // Success, update
-            update_product($ProductId, $ProductName, $Description, $Stock, $PriceEach, $ImagePath, $CategoryId, $IsFeatured);
+            update_product($ProductName, $Description, $Stock, $PriceEach, $ImagePath, $CategoryId, $IsFeatured, $ProductId);
             
             $success_message = "You have updated product: $ProductName.";
             include('server/view/success.php');
@@ -77,10 +80,65 @@ switch ($action) {
         }
         break;
 
-    case 'view_update_product':
+    // Update the credentials of the admin account.
+    case 'add_product':
+
+        $form = new Form();
+
+        $form->text("ProductName", "Product Name", $ProductName);
+        $form->text("Description", "Description", $Description, TRUE, 1, 8000);
+        $form->int("Stock", "Stock", $Stock);
+        $form->float("PriceEach", "Price Each", $PriceEach);
+        $form->text("ImagePath", "Image Path", $ImagePath, TRUE, 1, 255);
+        $form->int("CategoryId", "Category", $CategoryId);
+        $form->boolean("IsFeatured", "Is Featured", $IsFeatured);
+
+        $error_messages = $form->getErrorMessages();
+
+        // Check categoryId exists
+        $existing_category = get_category($CategoryId);
+        
+        if($existing_category === NULL) {
+            $error_messages[] = "Category doesn't exist.";
+        }
+
+        if(empty($error_messages)){
+            
+            // Success, update
+            create_product($ProductName, $Description, $Stock, $PriceEach, $ImagePath, $CategoryId, $IsFeatured);
+            
+            $success_message = "You have added product: $ProductName.";
+            include('server/view/success.php');
+            
+        } else {
+            
+            // Failure, show the update form again
+            include('admin/products/product_edit_view.php');
+        }
+        break;
+
+    case 'delete_product':
+
+        $product = get_product($ProductId);
+        $ProductName = $product['ProductName'];
+
+        if(empty($ProductName)) {
+            display_error("That prodcut doesn't exist.");
+        } else {
+            delete_product($ProductId);
+
+            $success_message = "You have deleted product: $ProductName.";
+            include('server/view/success.php');
+        }
+
+        break;
+
+    // Show the update view
+    case 'view_update':
 
         $product = get_product($ProductId);
         
+        $ProductId = $product['ProductId'];
         $ProductName = $product['ProductName'];
         $Description = $product['Description'];
         $Stock = $product['Stock'];
@@ -93,14 +151,33 @@ switch ($action) {
 
         break;
 
+    // Show the add view
+    case 'view_add':
+
+        $product = get_product($ProductId);
+        
+        $ProductName = $product['ProductName'];
+        $Description = $product['Description'];
+        $Stock = $product['Stock'];
+        $PriceEach = $product['PriceEach'];
+        $ImagePath = $product['ImagePath'];
+        $CategoryId = $product['CategoryId'];
+        $IsFeatured = $product['IsFeatured'];
+
+        include('admin/products/product_add_view.php');
+
+        break;
+
 
     // Show the list
     case 'view_list':
     default:
 
+        $list_title = "Manage Products";
+        $list_description = "Select a product to edit it.";
         $products = get_all_products();
 
         // Show the list
-        include('admin/products/list_products_view.php');
+        include('admin/products/table_view.php');
         break;
 }

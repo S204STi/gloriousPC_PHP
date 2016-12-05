@@ -6,9 +6,10 @@
 <p>Edit product information.</p>
 
 <div class="form-wrapper">
-    <form action="admin/products/index.php" method="post">
+    <form action="admin/products/index.php" name="update_product" method="post">
 
         <input type="hidden" name="action" value="update_product">
+        <input type="hidden" name="ProductId" value="<?php echo $ProductId ?>">
         
         <?php 
         
@@ -28,6 +29,15 @@
         <input type="hidden" name="action" value="view_list">
         <button type="submit"><span class="fa fa-arrow-left"></span>&nbsp; Back To List</button>
     </form>
+
+    <form action="admin/products/index.php" method="post">
+        <input type="hidden" name="action" value="delete_product">
+        <input type="hidden" name="ProductId" value="<?php echo $ProductId ?>">
+        <button type="submit"><span class="fa fa-times"></span>&nbsp; Delete Product</button>
+    </form>
+
+    <div>
+    </div>
 </div>
 
 <?php include('server/view/footer.php'); ?>

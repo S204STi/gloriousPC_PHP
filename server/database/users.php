@@ -111,9 +111,7 @@ function update_user($UserName, $Password, $AppUserId) {
         $statement->bindValue(':password', $Password);
         $statement->bindValue(':appUserId', $AppUserId);
         $statement->execute();
-        $userId = $db->lastInsertId();
         $statement->closeCursor();
-        return $userId;
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
