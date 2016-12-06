@@ -4,3 +4,7 @@ A storefront made using PHP. This store features an admin backend to manage cont
 ## Notes
 Run by placing in an Apache server and cloning the database.
 The database user can be adjusted in server/main.php.  
+
+## Made by
+Jeff Schreiner, 2016
+See License file for usage permissions.
