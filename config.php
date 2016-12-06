@@ -9,7 +9,7 @@ function get_web_root() {
 
     try {
         // make an absolute url that points to the base of the app
-        $app_path = '/' . $dirs[1] . '/';
+        @ $app_path = '/' . $dirs[1] . '/';
     } catch (Exception $e) {
         // Split for windows in case the unix version doesn't work.
         $dirs = explode('\\', $uri);
